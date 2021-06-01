@@ -1,0 +1,72 @@
+package pocketmon;
+
+import java.util.Scanner;
+
+/*
+ * 포켓몬들 정의
+ */
+public class Pieri {
+	Scanner sc = new Scanner(System.in);
+
+	public Pieri() {
+
+		// 파이리 공격 기술, 체력
+		int PieriPH = 100;
+		int Scratch, FireSpin;
+
+		// 또가스 공격 기술, 체력
+		int DdogasHP = 100;
+		int Smog, SludgeBomb;
+
+		System.out.println("===== 파이리를 선택하셨습니다!! ======");
+		System.out.println("===== 앗! 야생의 또가스가 나타났다!=====");
+
+		// 대전
+		while (PieriPH > 0 && DdogasHP > 0) {
+			Scratch = (int) (Math.random() * 20 + 1); // 할퀴기
+			FireSpin = (int) (Math.random() * 35 + 1); // 불꽃 회오리
+
+			int attackIdx = (int) (Math.random() * 3 + 1); // 또가스가 공격할 랜덤 기술
+			Smog = (int) (Math.random() * 25 + 1); // 스모그
+			SludgeBomb = (int) (Math.random() * 30 + 1); // 오물폭탄
+
+			System.out.println("===== 파이리가 공격합니다. =====");
+			System.out.println("1. 할퀴기");
+			System.out.println("2. 불꽃 회오리");
+			System.out.print("공격 기술을 선택하세요 : ");
+			int skill = sc.nextInt();
+			System.out.println();
+
+			// 파이리 공격
+			if (skill == 1) {
+				System.out.println("파이리! 할퀴기!");
+				DdogasHP -= Scratch;
+				System.out.println((DdogasHP > 0) ? "또가스의 HP가 " + DdogasHP + "이 남았습니다." : "또가스의 HP가 0이 되었습니다.");
+			} else if (skill == 2) {
+				System.out.println("파이리! 불꽃 회오리!");
+				DdogasHP -= FireSpin;
+				System.out.println((DdogasHP > 0) ? "또가스의 HP가 " + DdogasHP + "이 남았습니다." : "또가스의 HP가 0이 되었습니다.");
+			} else {
+				System.out.println("해당 기술은 없습니다. 다시 선택하세요.");
+			}
+
+			// 또가스 공격
+			if (skill == 1 || skill == 2) {
+				System.out.println("===== 또가스가 공격합니다. =====");
+				System.out.println((attackIdx == 1) ? "또가스! 오물폭탄!" : "또가스! 스모그!");
+				PieriPH -= (attackIdx == 1) ? SludgeBomb : Smog;
+				System.out.println((PieriPH > 0) ? "파이리 HP가 " + PieriPH + "이 남았습니다." : "파이리의 HP가 0이 되었습니다.");
+				System.out.println();
+			}
+		}
+
+		System.out.println((PieriPH <= 0) ? "파이리가 패배했습니다." : "파이리가 승리했습니다.");
+		System.out.println("다시 도전하시겠습니까?(Y 입력)");
+		System.out.println("아무 키나 입력할 시 포켓몬 선택 창으로 넘어갑니다.");
+		char c = sc.next().charAt(0);
+		if (c == 'Y' || c == 'y')
+			new Pieri();
+		else
+			new Game();
+	}
+}

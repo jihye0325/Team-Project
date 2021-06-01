@@ -1,0 +1,60 @@
+package pocketmon;
+
+import java.util.Scanner;
+
+public class Game {
+
+	public Game() {
+		// 포켓몬스터 선택 or 종료
+		Scanner sc = new Scanner(System.in);
+		System.out.println("====== 포켓몬스터 ======");
+		System.out.println("1. 파이리");
+		System.out.println("2. 꼬부기");
+		System.out.println("3. 잠만보");
+		System.out.println("9. 게임 종료");
+		System.out.print("캐릭터를 선택하세요. : ");
+		int character = sc.nextInt();
+		
+		// 파이리 선택시 시작 or 재선택
+		if (character == 1) {
+			System.out.println("1. 시작, 2. 재선택");
+			int num = sc.nextInt();
+			if (num == 1) {
+				new Pieri();
+			} else {
+				new Game();
+			}
+		
+		// 꼬부기 선택시 시작 or 재선택
+		} else if (character == 2) {
+			System.out.println("1. 시작, 2. 재선택");
+			int num = sc.nextInt();
+			if (num == 1) {
+				new Kkobugi();
+			} else {
+				new Game();
+			}
+			
+		// 잠만보 선택시 시작 or 재선택
+		} else if (character == 3) {
+			System.out.println("1. 시작, 2. 재선택");
+			int num = sc.nextInt();
+			if (num == 1) {
+				new Snolrax();
+			} else {
+				new Game();
+			}
+		
+		// 게임 종료
+		} else if (character == 9) {
+			System.out.println("게임 종료");
+			return;
+		
+		// 잘못 입력한 경우
+		} else {
+			System.out.println("잘못 입력하셨습니다.");
+			System.out.println();
+			new Game();
+		}
+	}
+}

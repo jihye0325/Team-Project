@@ -1,0 +1,105 @@
+package pocketmon;
+
+import java.util.Scanner;
+
+public class Kkobugi {
+	public Kkobugi() {
+		Scanner sc = new Scanner(System.in);
+		//꼬부기 hp 설정, 롱스톤 hp 임의로 설정
+		int hpKkobugi = 250;
+		int hpEnemy = (int) (Math.random() * 200 + 150);
+		System.out.println("===== 꼬부기를 선택하셨습니다 =====");
+		System.out.println("===== 앗! 야생의 롱스톤이 나타났다!! =====");
+		
+		// 대전
+		while (hpKkobugi > 0 && hpEnemy > 0) {
+			System.out.println("============================================");
+			System.out.println("꼬부기 HP : " + hpKkobugi);
+			System.out.println("야생의 롱스톤 HP : " + hpEnemy);
+
+			System.out.println("===== 꼬부기 공격스킬 선택 =====");
+			System.out.println("1. 몸통박치기");
+			System.out.println("2. 물대포");
+			System.out.println("3. 아쿠아테일");
+			System.out.print("공격스킬을 선택하세요 : ");
+			int num = sc.nextInt();
+			sc.nextLine();
+			System.out.println();
+			
+			// 꼬부기 공격
+			switch (num) {
+			case 1:
+				System.out.println("꼬부기 몸통박치기 공격!");
+				System.out.println("꼬북꼬북!! 흔들..흔들.. 쾅!!");
+				int head = (int) (Math.random() * 60 + 20);
+				System.out.println("== 꼬부기의 공격으로 롱스톤의 hp가 " + head + " 감소했습니다! ==");
+				hpEnemy -= head;
+				break;
+			case 2:
+				System.out.println("꼬부기 물대포 공격!");
+				System.out.println("꼬북꼬북!! 쏴아아~~");
+				int water = (int) (Math.random() * 70 + 60);
+				System.out.println("== 꼬부기의 공격으로 롱스톤의 hp가 " + water + " 감소했습니다! ==");
+				hpEnemy -= water;
+				break;
+			case 3:
+				System.out.println("꼬부기 아쿠아테일 공격!");
+				System.out.println("꼬북꼬북!! 철썩~! 철썩~!");
+				int tail = (int) (Math.random() * 50 + 20);
+				System.out.println("== 꼬부기의 공격으로 롱스톤의 hp가 " + tail + " 감소했습니다! ==");
+				hpEnemy -= tail;
+				break;
+			default:
+				System.out.println("다시 선택해주세요.");
+				continue;
+			}
+			
+			// 롱스톤 공격
+			System.out.println();
+			System.out.println("===== 롱스톤이 공격합니다. =====");
+			int attack = (int) (Math.random() * 3 + 1);
+			switch (attack) {
+			case 1:
+				System.out.println("롱스톤 몸통박치기 공격!");
+				int a = (int) (Math.random() * 60 + 30);
+				hpKkobugi -= a;
+				System.out.println("== 야생의 롱스톤의 공격으로 꼬부기의 hp가 " + a + " 감소했습니다! ==");
+				break;
+
+			case 2:
+				System.out.println("롱스톤 조이기 공격!");
+				int b = (int) (Math.random() * 40 + 20);
+				hpKkobugi -= b;
+				System.out.println("== 야생의 롱스톤의 공격으로 꼬부기의 hp가 " + b + " 감소했습니다! ==");
+				break;
+			case 3:
+				System.out.println("롱스톤 돌떨구기 공격!");
+				int c = (int) (Math.random() * 60 + 50);
+				hpKkobugi -= c;
+				System.out.println("== 야생의 롱스톤의 공격으로 꼬부기의 hp가 " + c + " 감소했습니다! ==");
+				break;
+			}
+			System.out.println();
+		}
+		if (hpEnemy <= 0) {
+			System.out.println("=== 꼬부기가 야생의 롱스톤을 물리쳤습니다...! ===");
+
+		} else {
+			System.out.println("=== 꼬부기가 야생의 롱스톤에게 당했습니다...! ===");
+		}
+
+		for (;;) {
+			System.out.print("꼬부기로 다시 게임을 시작하시겠습니까?(y/n) : ");
+			char c = sc.nextLine().toUpperCase().charAt(0);
+			if (c == 'Y') {
+				new Kkobugi();
+				break;
+			} else if (c == 'N') {
+				new Game();
+				break;
+			} else {
+				System.out.println("다시 입력해주세요");
+			}
+		}
+	}
+}
